@@ -1,6 +1,6 @@
-FROM r-base:latest
+FROM bioconductor/devel_sequencing
 
-MAINTAINER Winston Chang "winston@rstudio.com"
+MAINTAINER Sean Davis "sdavis2@mail.nih.gov"
 
 RUN apt-get update && apt-get install -y -t unstable \
     sudo \
