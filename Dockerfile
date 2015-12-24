@@ -28,7 +28,12 @@ RUN R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cran.rstudio.
 RUN cp -R /usr/local/lib/R/site-library/shiny/examples/* /srv/shiny-server/
 
 EXPOSE 3838
+EXPOSE 8787
+
+COPY moresupervisord.conf /tmp/moresupervisord.conf
+
+RUN cat /tmp/moresupervisord.conf >> /etc/supervisor/conf.d/supervisord.conf
 
 COPY shiny-server.sh /usr/bin/shiny-server.sh
 
-CMD ["/usr/bin/shiny-server.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
